@@ -1,8 +1,6 @@
 const express = require("express");
 const path = require("path");
-
-const exphbs = require("express-handlebars");
-
+const { engine } = require("express-handlebars");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -11,15 +9,22 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.engine(".hbs", exphbs({ extname: ".hbs" }));
-app.set("view engine", ".hbs");
+app.engine("hbs", engine({ extname: ".hbs" }));
+
+app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", {
+    hello: "Changed title",
+    another: "Nothing",
+    title: "Home page",
+  });
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
+app.get("/posters", (req, res) => {
+  res.render("posters", {
+    title: "Posters page",
+  });
 });
 
 const PORT = process.env.PORT || 3000;
