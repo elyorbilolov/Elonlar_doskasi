@@ -13,14 +13,6 @@ app.engine("hbs", engine({ extname: ".hbs" }));
 
 app.set("view engine", "hbs");
 
-app.get("/", (req, res) => {
-  res.render("home", {
-    hello: "Changed title",
-    another: "Nothing",
-    title: "Home page",
-  });
-});
-
 app.get("/posters", (req, res) => {
   res.render("posters", {
     title: "Posters page",
