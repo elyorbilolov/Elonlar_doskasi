@@ -1,12 +1,7 @@
 const { Router } = require("express");
 const router = Router();
+const { getHomePage } = require("../controllers/homeControllers");
 
-router.get("/", (req, res) => {
-  res.render("home", {
-    hello: "Changed title",
-    another: "Nothing",
-    title: "Home page",
-  });
-});
+router.get("/", getHomePage);
 
 module.exports = router;

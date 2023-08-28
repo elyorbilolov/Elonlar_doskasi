@@ -1,12 +1,7 @@
 const { Router } = require("express");
 const router = Router();
+const { getPostersPage } = require("../controllers/posterControllers");
 
-router.get("/", (req, res) => {
-  res.render("home", {
-    hello: "Changed title",
-    another: "Nothing",
-    title: "Home page",
-  });
-});
+router.get("/", getPostersPage);
 
 module.exports = router;

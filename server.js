@@ -2,22 +2,24 @@ const express = require("express");
 const path = require("path");
 const { engine } = require("express-handlebars");
 const dotenv = require("dotenv");
+const homeRoutes = require("./routes/homeRoutes");
+const posterRoutes = require("./routes/posterRoutes");
 
+//Env variables
 dotenv.config();
 
 const app = express();
 
+//Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
+//Initialize template engine (Handlebars)
 app.engine("hbs", engine({ extname: ".hbs" }));
-
 app.set("view engine", "hbs");
 
-app.get("/posters", (req, res) => {
-  res.render("posters", {
-    title: "Posters page",
-  });
-});
+//Initialize routes
+app.use("/", homeRoutes);
+app.use("/posters", posterRoutes);
 
 const PORT = process.env.PORT || 3000;
 
