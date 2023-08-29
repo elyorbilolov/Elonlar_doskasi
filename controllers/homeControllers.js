@@ -4,6 +4,7 @@
 const getHomePage = (req, res) => {
   res.render("home", {
     title: "Home page",
+    url: process.env.URL,
   });
 };
 

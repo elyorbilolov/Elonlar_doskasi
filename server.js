@@ -10,6 +10,10 @@ dotenv.config();
 
 const app = express();
 
+//Body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 //Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
