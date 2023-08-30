@@ -1,3 +1,6 @@
+const { addNewPosterToDB } = require("../db/posters");
+const { v4 } = require("uuid");
+
 //@route        GET /posters
 //@desc         GET all posters
 //@access       Public
@@ -15,8 +18,17 @@ const addNewPosterPage = (req, res) => {
   });
 };
 
-const addNewPoster = (req, res) => {
-  console.log(req.body);
+const addNewPoster = async (req, res) => {
+  const poster = {
+    id: v4(),
+    title: req.body.title,
+    amount: req.body.amount,
+    region: req.body.region,
+    image: req.body.image,
+    description: req.body.description,
+  };
+  await addNewPosterToDB(poster);
+  res.redirect("/");
 };
 
 module.exports = { getPostersPage, addNewPosterPage, addNewPoster };

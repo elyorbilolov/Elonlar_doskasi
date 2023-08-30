@@ -1,0 +1,10 @@
+[
+  {
+    "id": "ididid123456789",
+    "title": "Noutbuk Acer",
+    "amount": 2000000,
+    "region": "Toshkent",
+    "image": "../public/assets/elon/elon6.jpg",
+    "description": "Zo'r noutbuk"
+  }
+]
