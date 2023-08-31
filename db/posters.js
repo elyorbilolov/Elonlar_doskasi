@@ -16,5 +16,17 @@ const addNewPosterToDB = async (poster) => {
   console.log("Data added");
 };
 
-module.exports = { addNewPosterToDB };
+const getAllPosters = async () => {
+  const data = () => fs.readFileSync(path.join(__dirname, "db.json"), "utf-8");
+  const posters = JSON.parse(data());
+  return posters;
+};
 
+const getPosterById = (id) => {
+  const data = () => fs.readFileSync(path.join(__dirname, "db.json"), "utf-8");
+  const posters = JSON.parse(data());
+  const poster = posters.find((p) => p.id === id);
+  return poster;
+};
+
+module.exports = { addNewPosterToDB, getAllPosters, getPosterById };
