@@ -1,1 +1,42 @@
-[{"id":"ididid123456789","title":"Noutbuk Acer","amount":2000000,"region":"Toshkent","image":"../public/assets/elon/elon1.jpg","describe":"Zo'r noutbuk"},{"id":"3fdb569a-41be-42de-9d96-fd44c46b4fcd","title":"yangi elon","amount":"13500","region":"Qarshi","image":"photo_2021-06-27_23-26-31.jpg","describe":"dfd df"},{"id":"f161d6cf-f152-49c8-821e-010cfb78b668","title":"pixels","amount":"500000","region":"Toshkent","image":"https://www.pexels.com/ru-ru/photo/8735765/","describe":"edss sdsd"},{"id":"d4145d18-4b66-458a-963e-51b6ffa1e900","title":"dfdsfdsf","amount":"3432","region":"Qarshi","image":"https://www.pexels.com/ru-ru/photo/8735765/","describe":"sf fdf"},{"id":"6cebe157-4bdb-4639-8911-6a405ee3d6a7","title":"dsfdsfdsf","amount":"3434","region":"Toshkent","image":"https://www.pexels.com/photo/wood-road-landscape-water-18071654/","describe":"asdasd sad"}]
+[
+  {
+    "id": "ididid123456789",
+    "title": "Noutbuk Acer",
+    "amount": 2000000,
+    "region": "Toshkent",
+    "image": "../public/assets/elon/elon1.jpg",
+    "describe": "Zo'r noutbuk"
+  },
+  {
+    "id": "3fdb569a-41be-42de-9d96-fd44c46b4fcd",
+    "title": "yangi elon",
+    "amount": "13500",
+    "region": "Qarshi",
+    "image": "photo_2021-06-27_23-26-31.jpg",
+    "describe": "dfd df"
+  },
+  {
+    "id": "f161d6cf-f152-49c8-821e-010cfb78b668",
+    "title": "pixels",
+    "amount": "500000",
+    "region": "Toshkent",
+    "image": "https://www.pexels.com/ru-ru/photo/8735765/",
+    "describe": "edss sdsd"
+  },
+  {
+    "id": "d4145d18-4b66-458a-963e-51b6ffa1e900",
+    "title": "dfdsfdsf",
+    "amount": "3432",
+    "region": "Qarshi",
+    "image": "https://www.pexels.com/ru-ru/photo/8735765/",
+    "describe": "sf fdf"
+  },
+  {
+    "id": "6cebe157-4bdb-4639-8911-6a405ee3d6a7",
+    "title": "dsfdsfdsf",
+    "amount": "3434",
+    "region": "Toshkent",
+    "image": "https://www.pexels.com/photo/wood-road-landscape-water-18071654/",
+    "describe": "asdasd sad"
+  }
+]
