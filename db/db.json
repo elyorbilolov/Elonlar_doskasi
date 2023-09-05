@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
   {
     "id": "ididid123456789",
@@ -40,3 +41,6 @@
     "describe": "asdasd sad"
   }
 ]
+=======
+[{"id":"ididid123456789","title":"Noutbuk Acer","amount":2000000,"region":"Toshkent","image":"assets/elon/elon1.jpg","describe":"Zo'r noutbuk"},{"id":"2ea8bfe7-d412-4cf4-b57e-4812a3e2200a","title":"Diska","amount":"3000000","region":"Toshkent","image":"https://www.pexels.com/photo/wood-road-landscape-water-18071654/","describe":"zor diska"},{"id":"e56b94bb-0ce5-4fe1-89aa-a3bc3011a1a6","title":"Saka diska","amount":"5000000","region":"Toshkent","image":"https://www.pexels.com/ru-ru/photo/8735765/","describe":"Zor diska balon xolati zor yangi"}]
+>>>>>>> 3673d0257fe29818fe1100803edcc70ca2cee9b3
