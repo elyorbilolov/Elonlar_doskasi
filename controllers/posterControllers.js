@@ -19,22 +19,6 @@ const getPostersPage = async (req, res) => {
   });
 };
 
-//@route        GET /posters/:id
-//@desc         GET one poster by id
-//@access       Public
-const getOnePoster = async (req, res) => {
-  try {
-    const poster = await getPosterById(req.params.id);
-    res.render("poster/one", {
-      title: poster.title,
-      url: process.env.URL,
-      poster,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 //@route        GET /posters/add
 //@desc         Get adding poster page
 //@access       Private
@@ -59,6 +43,22 @@ const addNewPoster = async (req, res) => {
   };
   await addNewPosterToDB(poster);
   res.redirect("/posters");
+};
+
+//@route        GET /posters/:id
+//@desc         GET one poster by id
+//@access       Public
+const getOnePoster = async (req, res) => {
+  try {
+    const poster = await getPosterById(req.params.id);
+    res.render("poster/one", {
+      title: poster.title,
+      url: process.env.URL,
+      poster,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //@route        GET /posters/:id/edit
