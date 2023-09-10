@@ -4,6 +4,10 @@ const { engine } = require("express-handlebars");
 const dotenv = require("dotenv");
 const homeRoutes = require("./routes/homeRoutes");
 const posterRoutes = require("./routes/posterRoutes");
+const connectDB = require("./config/db");
+
+//Connecting to database
+connectDB();
 
 //Env variables
 dotenv.config();

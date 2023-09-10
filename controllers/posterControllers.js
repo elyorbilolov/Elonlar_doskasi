@@ -1,22 +1,20 @@
-const {
-  addNewPosterToDB,
-  getAllPosters,
-  getPosterById,
-  editPosterById,
-  deletePosterById,
-} = require("../db/posters");
+const Poster = require("../models/posterModel");
 const { v4 } = require("uuid");
 
 //@route        GET /posters
 //@desc         GET all posters
 //@access       Public
 const getPostersPage = async (req, res) => {
-  const posters = await getAllPosters();
-  res.render("poster/posters", {
-    title: "Posters page",
-    posters,
-    url: process.env.URL,
-  });
+  try {
+    const posters = await Poster.find().lean();
+    res.render("poster/posters", {
+      title: "Posters page",
+      posters: posters.reverse(),
+      url: process.env.URL,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //@route        GET /posters/add
@@ -33,16 +31,20 @@ const addNewPosterPage = (req, res) => {
 //@desc         Add new poster
 //@access       Private
 const addNewPoster = async (req, res) => {
-  const poster = {
-    id: v4(),
-    title: req.body.title,
-    amount: req.body.amount,
-    region: req.body.region,
-    image: req.body.image,
-    description: req.body.description,
-  };
-  await addNewPosterToDB(poster);
-  res.redirect("/posters");
+  try {
+    console.log(req.file);
+    const poster = {
+      title: req.body.title,
+      amount: req.body.amount,
+      region: req.body.region,
+      image: "uploads/" + req.file.filename,
+      description: req.body.description,
+    };
+    await Poster.create(poster);
+    res.redirect("/posters");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //@route        GET /posters/:id
@@ -50,7 +52,7 @@ const addNewPoster = async (req, res) => {
 //@access       Public
 const getOnePoster = async (req, res) => {
   try {
-    const poster = await getPosterById(req.params.id);
+    const poster = await Poster.findById(req.params.id).lean();
     res.render("poster/one", {
       title: poster.title,
       url: process.env.URL,
@@ -66,7 +68,7 @@ const getOnePoster = async (req, res) => {
 //@access       Private (Own)
 const getEditPosterPage = async (req, res) => {
   try {
-    const poster = await getPosterById(req.params.id);
+    const poster = await Poster.findById(req.params.id).lean();
     res.render("poster/edit-poster", {
       title: "Edit page",
       url: process.env.URL,
@@ -90,7 +92,7 @@ const updatePoster = async (req, res) => {
       region: req.body.region,
       description: req.body.description,
     };
-    await editPosterById(req.params.id, editedPoster);
+    await Poster.findByIdAndUpdate(req.params.id, editedPoster);
     res.redirect("/posters");
   } catch (error) {
     console.log(error);
@@ -102,7 +104,7 @@ const updatePoster = async (req, res) => {
 //@access       Private (Own)
 const deletePoster = async (req, res) => {
   try {
-    await deletePosterById(req.params.id);
+    await Poster.findByIdAndRemove(req.params.id);
     res.redirect("/posters");
   } catch (error) {
     console.log(error);

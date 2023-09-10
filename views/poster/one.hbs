@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
-              <img src="{{poster.image}}" class="rounded mt-lg-3 mb-lg-3 img-fluid img-poster-page mx-auto d-block"
+              <img src="{{url}}{{poster.image}}" class="rounded mt-lg-3 mb-lg-3 img-fluid img-poster-page mx-auto d-block"
                 alt="...">
             </div>
           </div>
@@ -27,7 +27,7 @@
                 <p>{{poster.description}}</p>
                 <hr>
                 <div class="d-flex justify-content-between">
-                  <p>ID: {{poster.id}}</p>
+                  <p>ID: {{poster._id}}</p>
                   <p>Ko'rildi: 1025</p>
                 </div>
               </div>
@@ -55,8 +55,8 @@
             </div>
             <a href="#" type="button" class="btn btn-outline-secondary">+998911234567</a>
             <a href="#" type="button" class="btn mt-3 btn-success">Muallifning boshqa e'lonlari</a>
-            <a href="/posters/{{poster.id}}/edit" type="button" class="btn mt-3 btn-warning">E'loni o'zgartirish</a>
-            <form class="d-grid" action="/posters/{{poster.id}}/delete" method="post">
+            <a href="/posters/{{poster._id}}/edit" type="button" class="btn mt-3 btn-warning">E'loni o'zgartirish</a>
+            <form class="d-grid" action="/posters/{{poster._id}}/delete" method="post">
               <button type="submit" class="btn mt-3 btn-danger">O'chirish</button>
             </form>
           </div>
