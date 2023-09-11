@@ -36,8 +36,8 @@ const addNewPoster = async (req, res) => {
       title: req.body.title,
       amount: req.body.amount,
       region: req.body.region,
-      image: "uploads/" + req.file.filename,
       description: req.body.description,
+      image: "uploads/" + req.file.filename,
     };
     await Poster.create(poster);
     res.redirect("/posters");
@@ -51,7 +51,11 @@ const addNewPoster = async (req, res) => {
 //@access       Public
 const getOnePoster = async (req, res) => {
   try {
-    const poster = await Poster.findById(req.params.id).lean();
+    const poster = await Poster.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { visits: 1 } },
+      { new: true }
+    ).lean();
     res.render("poster/one", {
       title: poster.title,
       url: process.env.URL,
