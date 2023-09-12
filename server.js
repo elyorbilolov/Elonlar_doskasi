@@ -1,22 +1,38 @@
 const express = require("express");
 const path = require("path");
 const { engine } = require("express-handlebars");
+const session = require("express-session");
+const MongoStore = require("connect-mongodb-session")(session);
 const dotenv = require("dotenv");
-const homeRoutes = require("./routes/homeRoutes");
-const posterRoutes = require("./routes/posterRoutes");
 const connectDB = require("./config/db");
-
-//Connecting to database
-connectDB();
 
 //Env variables
 dotenv.config();
 
+//Connecting to database
+connectDB();
+
 const app = express();
+
+//Initialize session store
+const store = new MongoStore({
+  collection: "sessions",
+  uri: process.env.MONGO_URI,
+});
 
 //Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//Session configuration
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store,
+  })
+);
 
 //Set static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -26,8 +42,9 @@ app.engine("hbs", engine({ extname: ".hbs" }));
 app.set("view engine", "hbs");
 
 //Initialize routes
-app.use("/", homeRoutes);
-app.use("/posters", posterRoutes);
+app.use("/", require("./routes/homeRoutes"));
+app.use("/posters", require("./routes/posterRoutes"));
+app.use("/auth", require("./routes/authRoutes"));
 
 const PORT = process.env.PORT || 3000;
 
