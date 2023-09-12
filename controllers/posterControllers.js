@@ -91,7 +91,7 @@ const updatePoster = async (req, res) => {
     const editedPoster = {
       title: req.body.title,
       amount: req.body.amount,
-      image: req.body.image,
+      image: "uploads/" + req.file.filename,
       region: req.body.region,
       description: req.body.description,
     };
