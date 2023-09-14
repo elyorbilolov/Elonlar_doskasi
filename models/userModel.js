@@ -4,14 +4,14 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: true, // text ichiga yozish majburiy
+      unique: true, //yagona ekanligini anglatadi
     },
     username: {
       type: String,
       required: true,
       unique: true,
-      trim: true,
+      trim: true, //prabel bosh joyni olib tashlaydi
     },
     phone: {
       type: String,
@@ -20,11 +20,11 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-      minLength: 6,
+      minLength: 6, //6-Qatordan kam bolmasligi kerak
     },
   },
   {
-    timestamps: true,
+    timestamps: true, //Malumotlar qachon yaratilganini etib turadi
   }
 );
 
