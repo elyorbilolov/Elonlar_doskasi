@@ -1,5 +1,5 @@
 const Poster = require("../models/posterModel");
-const { v4 } = require("uuid");
+const User = require("../models/userModel");
 
 //@route        GET /posters
 //@desc         GET all posters
@@ -32,15 +32,26 @@ const addNewPosterPage = (req, res) => {
 //@access       Private
 const addNewPoster = async (req, res) => {
   try {
-    const poster = {
+    const newPoster = new Poster({
       title: req.body.title,
       amount: req.body.amount,
       region: req.body.region,
       description: req.body.description,
       image: "uploads/" + req.file.filename,
-    };
-    await Poster.create(poster);
-    res.redirect("/posters");
+    });
+
+    await User.findByIdAndUpdate(
+      req.session.user._id,
+      {
+        $push: { posters: newPoster._id },
+      },
+      { new: true, upsert: true }
+    );
+    await newPoster.save((error, posterSaved) => {
+      if (error) throw error;
+      const posterId = posterSaved._id;
+      res.redirect("/posters/" + posterId);
+    });
   } catch (error) {
     console.log(error);
   }
@@ -51,7 +62,11 @@ const addNewPoster = async (req, res) => {
 //@access       Public
 const getOnePoster = async (req, res) => {
   try {
-    const poster = await Poster.findByIdAndUpdate(req.params.id, { $inc: { visits: 1 } }, { new: true }).lean();
+    const poster = await Poster.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { visits: 1 } },
+      { new: true }
+    ).lean();
     res.render("poster/one", {
       title: poster.title,
       url: process.env.URL,

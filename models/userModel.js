@@ -22,6 +22,7 @@ const userSchema = new Schema(
       required: true,
       minLength: 6, //6-Qatordan kam bolmasligi kerak
     },
+    posters: [{ type: Schema.Types.ObjectId, ref: "Poster" }],
   },
   {
     timestamps: true, //Malumotlar qachon yaratilganini etib turadi
