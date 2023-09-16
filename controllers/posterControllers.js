@@ -10,6 +10,7 @@ const getPostersPage = async (req, res) => {
     res.render("poster/posters", {
       title: "Posters page",
       posters: posters.reverse(),
+      user: req.session.user,
       url: process.env.URL,
     });
   } catch (error) {
@@ -40,20 +41,22 @@ const addNewPoster = async (req, res) => {
       image: "uploads/" + req.file.filename,
     });
 
+    const posterSaved = await newPoster.save();
+    const posterId = posterSaved._id;
+
     await User.findByIdAndUpdate(
       req.session.user._id,
       {
-        $push: { posters: newPoster._id },
+        $push: { posters: posterId },
       },
       { new: true, upsert: true }
     );
-    await newPoster.save((error, posterSaved) => {
-      if (error) throw error;
-      const posterId = posterSaved._id;
-      res.redirect("/posters/" + posterId);
-    });
+
+    res.redirect("/posters/" + posterId);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    // Xatoni qaytaramiz yoki to'g'ri to'g'rilash maqsadida boshqa amallar qilamiz
+    res.status(500).send("Xatolik yuz berdi");
   }
 };
 
@@ -70,6 +73,7 @@ const getOnePoster = async (req, res) => {
     res.render("poster/one", {
       title: poster.title,
       url: process.env.URL,
+      user: req.session.user,
       poster,
     });
   } catch (error) {
