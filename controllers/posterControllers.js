@@ -24,6 +24,7 @@ const getPostersPage = async (req, res) => {
 const addNewPosterPage = (req, res) => {
   res.render("poster/add-poster", {
     title: `Yangi e'lon qo'shish`,
+    user: req.session.user,
     url: process.env.URL,
   });
 };

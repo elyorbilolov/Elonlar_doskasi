@@ -4,6 +4,8 @@
 const getHomePage = (req, res) => {
   res.render("home", {
     title: "Home page",
+    user: req.session.user,
+    isLogged: req.session.isLogged,
     url: process.env.URL,
   });
 };

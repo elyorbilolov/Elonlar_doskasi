@@ -5,11 +5,14 @@ const {
   getRegisterPage,
   registerNewUser,
   loginUser,
+  logout,
 } = require("../controllers/authControllers");
+const { guest } = require("../middlewares/auth");
 
-router.get("/login", getLoginPage);
-router.get("/signup", getRegisterPage);
-router.post("/signup", registerNewUser);
-router.post("/login", loginUser);
+router.get("/login", guest, getLoginPage);
+router.get("/signup", guest, getRegisterPage);
+router.post("/signup", guest, registerNewUser);
+router.post("/login", guest, loginUser);
+router.get("/logout", logout);
 
 module.exports = router;

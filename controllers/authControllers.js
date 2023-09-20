@@ -6,10 +6,12 @@ const bcrypt = require("bcryptjs");
 //@access       Public
 
 const getLoginPage = (req, res) => {
-  res.render("auth/login", {
-    title: "Login",
-    url: process.env.URL,
-  });
+  if (!req.session.isLogged) {
+    res.render("auth/login", {
+      title: "Login",
+      url: process.env.URL,
+    });
+  }
 };
 
 //@route        GET / auth/signup
@@ -17,10 +19,12 @@ const getLoginPage = (req, res) => {
 //@access       Public
 
 const getRegisterPage = (req, res) => {
-  res.render("auth/signup", {
-    title: "Registratsiya",
-    url: process.env.URL,
-  });
+  if (!req.session.isLogged) {
+    res.render("auth/signup", {
+      title: "Registratsiya",
+      url: process.env.URL,
+    });
+  }
 };
 
 //@route        POST / auth/signup
@@ -83,4 +87,19 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { getLoginPage, getRegisterPage, registerNewUser, loginUser };
+//@route        GET / auth/logout
+//@desc         Logout user
+//@access       Private
+const logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
+};
+
+module.exports = {
+  getLoginPage,
+  getRegisterPage,
+  registerNewUser,
+  loginUser,
+  logout,
+};
