@@ -8,9 +8,12 @@ const getProFilePage = async (req, res) => {
       .populate("posters")
       .lean();
     if (!user) throw new Error("Bunday foydalanuvchi mavjud emas");
+    const isMe = user._id == req.session.user._id.toString();
     res.render("user/profile", {
       title: `${user.username}`,
       user,
+      isMe,
+      myposters: req.session.user.username,
       posters: user.posters,
       isAuth: req.session.isLogged,
       url: process.env.URL,

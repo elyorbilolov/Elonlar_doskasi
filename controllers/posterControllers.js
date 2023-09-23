@@ -40,6 +40,7 @@ const addNewPoster = async (req, res) => {
       region: req.body.region,
       description: req.body.description,
       image: "uploads/" + req.file.filename,
+      author: req.session.user._id,
     });
 
     const posterSaved = await newPoster.save();
@@ -70,11 +71,14 @@ const getOnePoster = async (req, res) => {
       req.params.id,
       { $inc: { visits: 1 } },
       { new: true }
-    ).lean();
+    )
+      .populate("author")
+      .lean();
     res.render("poster/one", {
       title: poster.title,
       url: process.env.URL,
       user: req.session.user,
+      author: poster.author,
       poster,
     });
   } catch (error) {
