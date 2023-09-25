@@ -46,7 +46,7 @@
               <img src="/assets/noAvatar.png" class="rounded-circle img-fluid" alt="Cinque Terre"
                 style="width: 100px; height: 100px">
               <div class="d-flex flex-column">
-                <a href="#">
+                <a href="/profile/{{author.username}}">
                   <h5>{{author.username}}</h5>
                 </a>
                 <p>Saytda: {{formatDate author.createdAt}} dan beri</p>
@@ -54,7 +54,8 @@
               </div>
             </div>
             <a href="#" type="button" class="btn btn-outline-secondary">{{author.phone}}</a>
-            <a href="/profile/{{author.username}}" type="button" class="btn mt-3 btn-success">Muallifning boshqa e'lonlari</a>
+            <a href="/profile/{{author.username}}" type="button" class="btn mt-3 btn-success">Muallifning boshqa
+              e'lonlari</a>
             <a href="/posters/{{poster._id}}/edit" type="button" class="btn mt-3 btn-warning">E'loni o'zgartirish</a>
             <form class="d-grid" action="/posters/{{poster._id}}/delete" method="post">
               <button type="submit" class="btn mt-3 btn-danger">O'chirish</button>
