@@ -2,7 +2,7 @@ const User = require("../models/userModel");
 //@route        GET /profile/:username
 //@desc         User profile page
 //@access       Private
-const getProFilePage = async (req, res) => {
+const getProfilePage = async (req, res) => {
   try {
     const userProfile = await User.findOne({ username: req.params.username })
       .populate("posters")
@@ -13,7 +13,6 @@ const getProFilePage = async (req, res) => {
     if (req.session.user) {
       isMe = userProfile._id == req.session.user._id.toString();
     }
-
     res.render("user/profile", {
       title: `${userProfile.username}`,
       user: req.session.user,
@@ -23,9 +22,9 @@ const getProFilePage = async (req, res) => {
       isAuth: req.session.isLogged,
       url: process.env.URL,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
-module.exports = { getProFilePage };
+module.exports = { getProfilePage };

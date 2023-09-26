@@ -1,7 +1,8 @@
 const Poster = require("../models/posterModel");
-//@route        GET /
-//@desc         GET home page
-//@access       Public
+
+//@route      GET /
+//@desc       Get home page
+//@access     Public
 const getHomePage = async (req, res) => {
   const posters = await Poster.find().lean();
   res.render("home", {
@@ -13,4 +14,6 @@ const getHomePage = async (req, res) => {
   });
 };
 
-module.exports = { getHomePage };
+module.exports = {
+  getHomePage,
+};
