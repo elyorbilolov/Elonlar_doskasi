@@ -18,6 +18,15 @@ const getPostersPage = async (req, res) => {
         url: process.env.URL,
       });
     }
+
+    if (req.query) {
+      const { category, from, to, region } = req.query;
+      // $gte $lte $gt $lt
+      const posters = await Poster.find({ amount: { $gte: from } });
+
+      console.log(posters);
+    }
+
     const posters = await Poster.find().lean();
     res.render("poster/posters", {
       title: "Posters page",
