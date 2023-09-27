@@ -7,6 +7,15 @@ const filtering = require("../utils/filtering");
 //@access       Public
 const getPostersPage = async (req, res) => {
   try {
+    const pagelimit = 10;
+    const limit = parseInt(req.query.limit);
+    const page = parseInt(req.query.page);
+    const total = await Poster.countDocuments();
+
+    //Redirect if queires [page, limit] doesn't exist
+    if (req.url === "/") {
+      return res.redirect(`?page=1&limit=${pagelimit}`);
+    }
     if (req.query.search) {
       const { search } = req.query;
       const posters = await Poster.searchPartial(search).lean();
@@ -20,7 +29,7 @@ const getPostersPage = async (req, res) => {
       });
     }
 
-    if (req.query) {
+    if (!req.query.page || !req.query.limit) {
       const { category, from, to, region } = req.query;
       // $gte $lte $gt $lt
       const filterings = filtering(category, from, to, region);
@@ -34,7 +43,11 @@ const getPostersPage = async (req, res) => {
       });
     }
 
-    const posters = await Poster.find().lean();
+    const posters = await Poster.find()
+      .sort({ createdAt: -1 })
+      .skip(page * limit - limit)
+      .limit(limit)
+      .lean();
     return res.render("poster/posters", {
       title: "Posters page",
       posters: posters.reverse(),
