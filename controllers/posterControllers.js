@@ -83,6 +83,7 @@ const addNewPoster = async (req, res) => {
       title: req.body.title,
       amount: req.body.amount,
       region: req.body.region,
+      category: req.body.category,
       description: req.body.description,
       image: "uploads/" + req.file.filename,
       author: req.session.user._id,
@@ -158,6 +159,7 @@ const updatePoster = async (req, res) => {
       amount: req.body.amount,
       image: "uploads/" + req.file.filename,
       region: req.body.region,
+      category: req.body.category,
       description: req.body.description,
     };
     await Poster.findByIdAndUpdate(req.params.id, editedPoster);
