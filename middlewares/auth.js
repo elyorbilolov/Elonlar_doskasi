@@ -12,4 +12,7 @@ const guest = (req, res, next) => {
   next();
 };
 
-module.exports = { protected, guest };
+module.exports = {
+  protected,
+  guest,
+};

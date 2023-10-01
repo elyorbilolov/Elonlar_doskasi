@@ -17,7 +17,7 @@ router.get("/add", protected, addNewPosterPage);
 router.post("/add", protected, upload.single("image"), addNewPoster);
 router.get("/:id", getOnePoster);
 router.get("/:id/edit", protected, getEditPosterPage);
-router.post("/:id/edit", protected, upload.single("image"), updatePoster);
+router.post("/:id/edit", protected, updatePoster);
 router.post("/:id/delete", protected, deletePoster);
 
 module.exports = router;

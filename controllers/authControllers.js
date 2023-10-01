@@ -1,10 +1,9 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 
-//@route        GET / auth/login
-//@desc         Get login page
-//@access       Public
-
+//@route      GET /auth/login
+//@desc       Get login page
+//@access     Public
 const getLoginPage = (req, res) => {
   if (!req.session.isLogged) {
     res.render("auth/login", {
@@ -15,10 +14,9 @@ const getLoginPage = (req, res) => {
   }
 };
 
-//@route        GET / auth/signup
-//@desc         Get register page
-//@access       Public
-
+//@route      GET /auth/signup
+//@desc       Get register page
+//@access     Public
 const getRegisterPage = (req, res) => {
   if (!req.session.isLogged) {
     res.render("auth/signup", {
@@ -29,21 +27,21 @@ const getRegisterPage = (req, res) => {
   }
 };
 
-//@route        POST / auth/signup
-//@desc         Register new user to database
-//@access       Public
+//@route      POST /auth/signup
+//@desc       Register new user to database
+//@access     Public
 const registerNewUser = async (req, res) => {
   try {
     const { email, username, phone, password, password2 } = req.body;
     const userExist = await User.findOne({ email });
 
     if (userExist) {
-      req.flash(`regError`, `Bunday foydalanuvchi bazada bor`);
+      req.flash("regError", "Bunday foydalanuvchi bazada bor");
       return res.redirect("/auth/signup");
     }
 
     if (password !== password2) {
-      req.flash(`regError`, `Parollar mos tushmayapti`);
+      req.flash("regError", "Parollar mos tushmayapti");
       return res.redirect("/auth/signup");
     }
 
@@ -55,14 +53,14 @@ const registerNewUser = async (req, res) => {
     });
 
     return res.redirect("/auth/login");
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
-//@route        POST / auth/login
-//@desc         Login user to website
-//@access       Public
+//@route      POST /auth/login
+//@desc       Login user to website
+//@access     Public
 const loginUser = async (req, res) => {
   try {
     const userExist = await User.findOne({ email: req.body.email });
@@ -79,21 +77,21 @@ const loginUser = async (req, res) => {
           res.redirect("/profile/" + req.session.user.username);
         });
       } else {
-        req.flash(`loginError`, `Noto'g'ri ma'lumot kiritildi`);
+        req.flash("loginError", "Noto`ri ma`lumot kiritildi");
         res.redirect("/auth/login");
       }
     } else {
-      req.flash(`loginError`, `Bunday foydalanuvchi mavjud emas`);
+      req.flash("loginError", "Bunday foydalanuvchi mavjud emas");
       res.redirect("/auth/login");
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
-//@route        GET / auth/logout
-//@desc         Logout user
-//@access       Private
+//@route      GET /auth/logout
+//@desc       Logout user
+//@access     Private
 const logout = (req, res) => {
   req.session.destroy(() => {
     res.redirect("/");

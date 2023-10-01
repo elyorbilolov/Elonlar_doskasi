@@ -1,8 +1,5 @@
-<!-- Header-->
 <header class="py-5">
-  <!-- Page Content-->
   <div class="container px-4 px-lg-5">
-    <!-- Heading Row-->
     <div class="row gx-4 gx-lg-5 align-items-center my-5">
       <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="./assets/banner.jpg" alt="Banner" /></div>
       <div class="col-lg-5">
@@ -13,7 +10,6 @@
         <a class="btn btn-primary" href="posters/add">E'lon joylashtirish</a>
       </div>
     </div>
-    <!-- Call to Action-->
     <div class="card text-white bg-success my-5 py-4 text-center">
       <div class="card-body">
         <p class="text-white m-0">Ushbu qidiruv bo'limi orqali siz o'zingiz qidirayotgan biror e'lonni qidirib
@@ -115,7 +111,7 @@
                     class="card-title poster-title poster-link">{{title}}</span></a>
               </div>
               <p class="card-text" style="margin: 0">{{region}}.</p>
-              <p class="card-text">- {{formatDate createdAt}} 15:56</p>
+              <p class="card-text">- {{formatDate createdAt}}</p>
               <h5 class="card-subtitle mb-2">{{amount}} SO'M</h5>
             </div>
           </div>
@@ -124,7 +120,6 @@
         {{else}}
         <h3>Hali e'lon kiritilmagan</h3>
         {{/if}}
-
         <div class="col-auto m-auto mt-3 mb-5">
           <a type="button" href="/posters" class="btn btn-outline-secondary btn-lg mb-3">Barcha e'lonlar...</a>
         </div>
