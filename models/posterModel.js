@@ -54,25 +54,19 @@ posterSchema.index({
 });
 
 posterSchema.statics = {
-  searchPartial: function (q, callback) {
-    return this.find(
-      {
-        $or: [
-          { title: new RegExp(q, "gi") },
-          { description: new RegExp(q, "gi") },
-        ],
-      },
-      callback
-    );
+  searchPartial: function (q) {
+    return this.find({
+      $or: [
+        { title: new RegExp(q, "gi") },
+        { description: new RegExp(q, "gi") },
+      ],
+    });
   },
 
-  searchFull: function (q, callback) {
-    return this.find(
-      {
-        $text: { $search: q, $caseSensitive: false },
-      },
-      callback
-    );
+  searchFull: function (q) {
+    return this.find({
+      $text: { $search: q, $caseSensitive: false },
+    });
   },
 };
 

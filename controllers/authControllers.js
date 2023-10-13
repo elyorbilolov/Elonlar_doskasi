@@ -49,7 +49,7 @@ const registerNewUser = async (req, res) => {
       email,
       username,
       phone,
-      password: hashedPassword,
+      password,
     });
 
     return res.redirect("/auth/login");
